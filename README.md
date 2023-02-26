@@ -206,7 +206,10 @@ You can define your aliases there and they will always be available.
 
 `command alias -h "Evaluate a Swift expression, stopping at existing breakpoints" -- exst expression -lswift -i0 --`
 
-`command alias -- fetch-mp expression -lobjc @import LKOMicropush; [[[LKOMicropush assembly] service] retrieveNewCommands];`
+Useful project-specific shortcuts, too:
+
+`command alias -- fetch-foo expression -lswift import FooKit; FooService.shared.fetchAllData()`
+
 
 ^Contents of my own .lldbinit
 The `h` flag is for a help string; optional
@@ -474,18 +477,16 @@ Now you can invoke the function by the given command name.
 
 ---
 
-![inline](WTFScript.png)
+![inline](PrintDirScript.png)
 
-^This ties everything together. Here we have a Python lldb module that creates a breakpoint on UIViewAlertForUnsatisfiableConstraints. So this is always set when the debugger starts. And it adds a command that (in theory) will open a URL to wtfautolayout.com using the string passed to that function.
+^This ties everything together. Here we have a Python lldb module that creates a command `pdir`. This invokes a Python function `printdir`...
 
 ---
 
-![fit left](WTFScript-2.png)
+![inline](PrintDirScript-2.png)
 
-![fit right](WTFScript-3.png)
-
-^Access to full running state, look at stack frames.
-Unfortunately I never managed to completely figure this out, but the potential is there.
+^The `printdir` function accepts some input that looks like a system directory and evaluates it via `FileManager` to give you the full path -- useful in the sim.
+Run commands, read state, look at stack frames, full access to the debugger _plus_ Python
 
 ---
 
